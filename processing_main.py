@@ -1,19 +1,20 @@
 import os
 from typing import Optional
 
+import pandas as pd
 import numpy as np
 from roi_rectangle import RoiRectangle
 
 from src.logger import setup_logger, Logger
 from src.processor.core import CoreProcessor
-from src.processor.loader import HDF5FileLoader
+from src.processor.loader import PalXFELLoader
 from src.processor.saver import SaverStrategy, get_saver_strategy
 from src.preprocessor.image_qbpm_preprocessor import (
     subtract_dark_background,
     create_pohang,
     ImagesQbpmProcessor
 )
-from src.gui.roi import get_roi_auto, get_hdf5_images, RoiSelector
+from src.gui.roi import get_hdf5_images, RoiSelector
 from src.filesystem import get_run_scan_directory
 from src.config.config import load_config, ExpConfig
 from src.functional import compose
@@ -29,18 +30,25 @@ def get_scan_nums(run_num: int) -> list[int]:
     return [int(scan_dir.split("=")[1]) for scan_dir in scan_folders]
 
 
-def get_roi(scan_dir: str, index_mode: Optional[int] = None) -> RoiRectangle:
+def get_roi(scan_dir: str) -> RoiRectangle:
     """Get Roi for QBPM Normalization"""
     files = os.listdir(scan_dir)
+    file: str = os.path.join(scan_dir, files[0])
+    metadata = pd.read_hdf(file, key='metadata')
+    roi_coord = np.array(
+        metadata[
+            f'detector_{config.param.hutch.value}_{config.param.detector.value}_parameters.ROI'
+        ].iloc[0][0]
+    )
 
-    if index_mode is None:
-        index = len(files) // 2
-    else:
-        index = index_mode
+    roi = np.array([
+        roi_coord[config.param.x1],
+        roi_coord[config.param.y1],
+        roi_coord[config.param.x2],
+        roi_coord[config.param.y2]
+    ], dtype=np.int_)
 
-    file: str = os.path.join(scan_dir, files[index])
-    image = get_hdf5_images(file, config).sum(axis=0)
-    return get_roi_auto(image)
+    return RoiRectangle.from_tuple(roi)
 
 
 def select_roi(scan_dir: str, index_mode: Optional[int] = None) -> RoiRectangle:
@@ -57,20 +65,42 @@ def select_roi(scan_dir: str, index_mode: Optional[int] = None) -> RoiRectangle:
     return RoiRectangle.from_tuple(RoiSelector().select_roi(np.log1p(image)))
 
 
+def auto_roi(scan_dir: str, index_mode: Optional[int] = None):
+    files = os.listdir(scan_dir)
+    files.sort(key=lambda name: int(name[1:-3]))
+    if index_mode is None:
+        index = len(files) // 2
+    else:
+        index = index_mode
+
+    file: str = os.path.join(scan_dir, files[index])
+    image = get_hdf5_images(file, config).sum(axis=0)
+    y, x, *_ = np.unravel_index(np.argmax(image, axis=None), image.shape)
+
+    d = 20
+
+    return RoiRectangle(x - d, y - d, x + d, y + d)
+
+
 def setup_preprocessors(scan_dir: str) -> dict[str, ImagesQbpmProcessor]:
     """Return preprocessors"""
 
-    roi_rect = select_roi(scan_dir, None)
+    # roi_rect = select_roi(scan_dir, None)
+    roi_rect = auto_roi(scan_dir, None)
+
     if roi_rect is None:
         raise ValueError(f"No ROI Rectangle Set for {scan_dir}")
     logger.info(f"ROI rectangle: {roi_rect.to_tuple()}")
     pohang = create_pohang(roi_rect)
 
     # compose make a function that exicuted from right to left
-    new_standard = compose(pohang, subtract_dark_background)
+    standard = compose(
+        pohang
+        ,subtract_dark_background
+        )
 
     return {
-        "new_standard": new_standard,
+        "standard": standard,
     }
 
 
@@ -84,7 +114,7 @@ def process_scan(run_n: int, scan_n: int) -> None:
 
     for preprocessor_name in preprocessors:
         logger.info(f"preprocessor: {preprocessor_name}")
-    processor: CoreProcessor = CoreProcessor(HDF5FileLoader, scan_dir, preprocessors, logger)
+    processor: CoreProcessor = CoreProcessor(PalXFELLoader, scan_dir, preprocessors, logger)
 
     # Set SaverStrategy
     npz_saver: SaverStrategy = get_saver_strategy("npz")

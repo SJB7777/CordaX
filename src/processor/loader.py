@@ -43,7 +43,7 @@ class RawDataLoader(ABC):
         """
 
 
-class HDF5FileLoader(RawDataLoader):
+class PalXFELLoader(RawDataLoader):
     """Load hdf5 file and remove unmatching data."""
     def __init__(self, file: str):
         """
@@ -69,7 +69,7 @@ class HDF5FileLoader(RawDataLoader):
 
         # roi_coord = np.array(
         #     self.metadata[
-        #         f'detector_{self.config.param.hutch}_{self.config.param.detector}_parameters.ROI'
+        #         f'detector_{self.config.param.hutch.value}_{self.config.param.detector.value}_parameters.ROI'
         #     ].iloc[0][0]
         # )
         # roi = np.array([
@@ -78,7 +78,7 @@ class HDF5FileLoader(RawDataLoader):
         #     roi_coord[self.config.param.y1],
         #     roi_coord[self.config.param.y2]
         # ], dtype=np.int_)
-        # self.roi_rect = RoiRectangle().from_tuple(roi)
+        # self.roi_rect = RoiRectangle.from_tuple(roi)
 
     def get_merged_df(self, metadata: pd.DataFrame) -> pd.DataFrame:
         """
@@ -203,5 +203,5 @@ if __name__ == "__main__":
 
 
     start = time.time()
-    loader = HDF5FileLoader(file)
+    loader = PalXFELLoader(file)
     print(f"{time.time() - start} sec")

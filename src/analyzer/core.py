@@ -31,7 +31,7 @@ class DataAnalyzer:
 
         if "delay" not in data or "pon" not in data or "poff" not in data:
             raise ValueError(
-                "The file does not contain the required keys: 'delay', 'pon', 'poff'"
+                f"The file {file} does not contain the required keys: 'delay', 'pon', 'poff'"
             )
 
         self.delay: npt.NDArray = data["delay"]

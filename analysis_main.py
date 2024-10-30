@@ -31,7 +31,7 @@ def main() -> None:
     config: ExpConfig = load_config()
     logger: Logger = setup_logger()
 
-    run_nums: list[int] = [62]
+    run_nums: list[int] = [161, 162, 163, 164, 165, 166, 167]
     logger.info(f"Data Analysing run={run_nums}")
     for run_num in run_nums:  # pylint: disable=not-an-iterable
         # Define run and scan numbers

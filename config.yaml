@@ -1,17 +1,17 @@
 runs:
-  - 193
+  [161, 162, 163, 164, 165, 166, 167, 168, 183, 195, 198, 199, 220, 221, 236, 237]
 
 path:
   log_dir: ./logs
 
-  load_dir: Y:\240608_FXS\raw_data\h5\type=raw
-  analysis_dir: Y:\240608_FXS\analysis_data
+  load_dir: Z:\240821_FXS\data(160-250)\BackUp
+  analysis_dir: Z:\240821_FXS\analysis_data
 
   # load_dir: F:\XFEL\raw_data
   # analysis_dir: F:\XFEL\analysis_data
 
   output_dir: ${path.analysis_dir}\output_data
-  mat_dir: ${path.analysis_dir}\mat_files2
+  mat_dir: ${path.analysis_dir}\mat_files
   processed_dir: ${path.analysis_dir}\processed_data
 
 param:
@@ -19,10 +19,10 @@ param:
   hutch: eh1
   detector: jungfrau2
   xray: HX
-  x1: 2
-  x2: 3
   y1: 0
   y2: 1
+  x1: 2
+  x2: 3
   sdd: 1.3
   dps: 7.5e-05
   beam_energy: 9.7

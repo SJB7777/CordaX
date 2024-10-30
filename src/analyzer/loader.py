@@ -15,21 +15,4 @@ class NpzLoader:
 
 
 if __name__ == "__main__":
-    import os
-    from src.config.config import load_config
-    from src.processor.saver import MatSaverStrategy, NpzSaverStrategy
-    config = load_config()
-    npz_file = os.path.join(config.path.processed_dir, "run=0169_scan=0001.npz")
-
-    poff = NpzLoader(npz_file).data['poff']
-    pon = NpzLoader(npz_file).data['pon']
-
-    result = (pon + poff) / 2
-    print(result.shape)
-    print(result.max())
-    print(result.min())
-    print(result.mean())
-    print(result.dtype)
-
-    mat_saver = MatSaverStrategy()
-    mat_saver.save("run=0169_scan=0001", {'pon': result})
+    pass

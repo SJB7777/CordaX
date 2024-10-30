@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
 
 from src.preprocessor.generic_preprocessors import get_linear_regression_confidence_bounds, ransac_regression
-from src.processor.loader import HDF5FileLoader
+from src.processor.loader import PalXFELLoader
 from src.filesystem import get_run_scan_directory
 
 from src.config.config import load_config
@@ -94,7 +94,7 @@ def find_outliers_run_scan_gui(run: int, scan: int) -> float:
     files = os.listdir(scan_dir)
     file = os.path.join(scan_dir, files[len(files) // 2])
 
-    rr = HDF5FileLoader(file)
+    rr = PalXFELLoader(file)
     images = rr.images
     qbpm = rr.qbpm
 
@@ -107,7 +107,7 @@ def RANSAC_regression_gui(run: int, scan: int) -> None:
     files = os.listdir(scan_dir)
     file = os.path.join(scan_dir, files[len(files) // 2])
 
-    rr = HDF5FileLoader(file)
+    rr = PalXFELLoader(file)
     images = rr.images
     qbpm = rr.qbpm
 
