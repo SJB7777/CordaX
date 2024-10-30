@@ -6,9 +6,9 @@ import numpy as np
 from roi_rectangle import RoiRectangle
 
 from src.logger import setup_logger, Logger
-from src.processor.core import CoreProcessor
-from src.processor.loader import PalXFELLoader
-from src.processor.saver import SaverStrategy, get_saver_strategy
+from src.summarizer.core import CoreSummarizer
+from src.summarizer.loader import PalXFELLoader
+from src.summarizer.saver import SaverStrategy, get_saver_strategy
 from src.preprocessor.image_qbpm_preprocessor import (
     subtract_dark_background,
     create_pohang,
@@ -114,7 +114,7 @@ def process_scan(run_n: int, scan_n: int) -> None:
 
     for preprocessor_name in preprocessors:
         logger.info(f"preprocessor: {preprocessor_name}")
-    processor: CoreProcessor = CoreProcessor(PalXFELLoader, scan_dir, preprocessors, logger)
+    processor: CoreSummarizer = CoreSummarizer(PalXFELLoader, scan_dir, preprocessors, logger)
 
     # Set SaverStrategy
     npz_saver: SaverStrategy = get_saver_strategy("npz")

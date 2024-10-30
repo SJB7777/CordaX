@@ -75,6 +75,7 @@ def save_power_df(power_df: pd.DataFrame, root: str):
         file = os.path.join(root, f'power={power:0>2}_run={power_run[power]:0>3}.csv')
         df_filtered.to_csv(file, index=False)
 
+
 if __name__ == "__main__":
     power_run: dict[int, int] = {
         1: 89,

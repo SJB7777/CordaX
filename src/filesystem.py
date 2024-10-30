@@ -46,26 +46,3 @@ def make_run_scan_directory(mother: str, run: int, scan: int) -> str:
     path = os.path.join(path, f'scan={scan:0>3d}')
     os.makedirs(path, exist_ok=True)
     return path
-
-
-def format_run_scan_filename(run: int, scan: Optional[int] = None, file_num: Optional[int] = None) -> str:
-    """
-    Generate a formatted file name based on the provided run, scan, and file number.
-
-    Parameters:
-        run (int): The run number to be included in the file name.
-        scan (int, optional): The scan number to be included in the file name.
-            If not provided, only the run number will be included.
-        file_num (int, optional): The file number to be included in the file name.
-            If provided, both run and scan numbers will be included.
-
-    Returns:
-        str: The formatted file name containing run, scan, and file numbers (if applicable) separated by underscores.
-    """
-
-    if scan is None and file_num is None:
-        return f"run={run:0>3}"
-    if scan is not None and file_num is None:
-        return "_".join([f"run={run:0>3}", f"scan={scan:0>3}"])
-    if scan is not None and file_num is not None:
-        return "_".join([f"run={run:0>3}", f"scan={scan:0>3}", f"p{file_num:0>4}"])

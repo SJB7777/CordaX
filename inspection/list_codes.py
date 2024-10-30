@@ -19,6 +19,6 @@ def gather_python_files(directory: str, output_file: str):
 
 
 if __name__ == "__main__":
-    project_directory: str = 'C:\\Users\\isaac\\Downloads\\cohere_core-4.2.0'
+    project_directory: str = '.\\'
     output_file: str = 'project_code.txt'
     gather_python_files(project_directory, output_file)

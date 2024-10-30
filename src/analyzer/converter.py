@@ -16,7 +16,7 @@ def load_lcls_cube(file: str) -> dict[str, npt.NDArray]:
             delays = np.array(hf['delay'])
         # FIXME: Find How to get angles
         elif 'scan__xcs_gon_rot' in hf:
-            delays = np.array(hf['scan__xcs_gon_rot'])
+            delays = np.zeros(images.shape[0])
         else:
             delays = np.zeros(images.shape[0])
     return {

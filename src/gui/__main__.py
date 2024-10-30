@@ -5,7 +5,7 @@ import click
 
 from src.gui.roi import RoiSelector
 from src.config.config import load_config
-from src.analyzer.loader import NpzLoader
+from src.analyzer.converter import load_npz
 from src.filesystem import get_run_scan_directory
 
 def load_image(run_n: int) -> np.ndarray:
@@ -19,7 +19,7 @@ def load_image(run_n: int) -> np.ndarray:
     if not os.path.exists(npz_file):
         raise click.ClickException(f"File '{npz_file}' not found.")
 
-    data = NpzLoader(npz_file).data
+    data = load_npz(npz_file)
 
     if 'poff' in data:
         image = data['poff'].mean(0)

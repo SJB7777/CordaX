@@ -86,8 +86,7 @@ class DataAnalyzer:
         com_ys = []
 
         for image in roi_images:
-            max_y, max_x = np.unravel_index(np.argmax(image), image.shape)
-            # max_y, max_x = height // 2, width // 2
+            max_y, max_x = np.unravel_index(np.argmax(image), image.shape) # pylint: disable=unbalanced-tuple-unpacking
 
             x: npt.NDArray = np.arange(0, width)
             y: npt.NDArray = np.arange(0, height)
@@ -154,8 +153,3 @@ class DataAnalyzer:
 
         roi_df = roi_df.set_index(self.delay)
         return roi_df
-
-
-if __name__ == "__main__":
-
-    print("Run analyzer.core")
