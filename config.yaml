@@ -1,11 +1,11 @@
 runs:
-  [161, 162, 163, 164, 165, 166, 167, 168, 183, 195, 198, 199, 220, 221, 236, 237]
+  [1]
 
 path:
   log_dir: ./logs
 
-  load_dir: Z:\240821_FXS\data(160-250)\BackUp
-  analysis_dir: Z:\240821_FXS\analysis_data
+  load_dir: E:\XFEL\sample_data
+  analysis_dir: E:\XFEL\sample_data
 
   # load_dir: F:\XFEL\raw_data
   # analysis_dir: F:\XFEL\analysis_data

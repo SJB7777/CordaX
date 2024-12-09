@@ -95,8 +95,8 @@ def setup_preprocessors(scan_dir: str) -> dict[str, ImagesQbpmProcessor]:
 
     # compose make a function that exicuted from right to left
     standard = compose(
-        pohang
-        , subtract_dark_background
+        pohang,
+        subtract_dark_background
         )
 
     return {
