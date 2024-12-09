@@ -96,7 +96,7 @@ def setup_preprocessors(scan_dir: str) -> dict[str, ImagesQbpmProcessor]:
     # compose make a function that exicuted from right to left
     standard = compose(
         pohang
-        ,subtract_dark_background
+        , subtract_dark_background
         )
 
     return {
@@ -127,7 +127,7 @@ def process_scan(run_n: int, scan_n: int) -> None:
 
 
 def main() -> None:
-    """Processing"""
+    """The entry point of the program."""
 
     run_nums: list[int] = config.runs
     logger.info(f"Runs to process: {run_nums}")

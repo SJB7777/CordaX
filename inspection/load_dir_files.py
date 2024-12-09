@@ -71,12 +71,16 @@ if __name__ == "__main__":
 
     from src.filesystem import get_run_scan_directory
     from src.config.config import load_config
-
+    import matplotlib.pyplot as plt
     config = load_config()
     load_dir: str = config.path.load_dir
 
-    file = get_run_scan_directory(load_dir, 1, 1, 110)
-
+    # file = get_run_scan_directory(load_dir, 1, 1, 110)
+    file = 'Z:\\241103_DFXM\\dat\\241108-241109\\20241108_Cu_80nm_01093.h5'
     with h5py.File(file) as hf:
-        print(hf)
-        h5_tree(hf)
+        # print(hf)
+        # h5_tree(hf)
+        img = hf['run/scan00001/det/eh2hama_img/rawData'][()][0,0,0,0]
+        plt.imshow(img)
+
+    plt.show()

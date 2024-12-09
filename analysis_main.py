@@ -2,7 +2,6 @@ import os
 from datetime import datetime
 from typing import TYPE_CHECKING, Optional
 
-import numpy as np
 import numpy.typing as npt
 import matplotlib.pyplot as plt
 import tifffile
