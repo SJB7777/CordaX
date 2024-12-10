@@ -2,7 +2,6 @@
 This module provides functionality to load and save configuration files, 
 with support for placeholder substitution in the configuration values.
 """
-
 import re
 from pathlib import Path
 from functools import lru_cache
@@ -59,7 +58,7 @@ def resolve_placeholder(placeholder, context):
 
 
 @lru_cache(maxsize=1)
-def load_config() -> ExpConfig:
+def __load_config() -> ExpConfig:
     """
     Load the configuration file, replace placeholders, and return the configuration object.
 
@@ -74,6 +73,22 @@ def load_config() -> ExpConfig:
     replaced_data = replace_placeholders(config_dict, context)
 
     return ExpConfig(**replaced_data)
+
+
+def load_config(reload: bool = False) -> ExpConfig:
+    """
+    Load the configuration file with an option to reload the cache.
+
+    Args:
+        reload (bool): If True, reload the configuration and update the cache.
+
+    Returns:
+        ExpConfig: Configuration object with placeholders resolved.
+    """
+    if reload:
+        __load_config.cache_clear()
+        return __load_config()
+    return __load_config()
 
 
 def save_config(config_dict: dict) -> None:

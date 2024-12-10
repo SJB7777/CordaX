@@ -1,11 +1,11 @@
 runs:
-  [144]
+  [144, 145, 146, 147, 148, 149, 150]
 
 path:
   log_dir: ./logs
 
-  load_dir: Z:\230518_FXS\raw_data\h5\type=raw
-  analysis_dir: Z:\230518_FXS\analysis_data
+  load_dir: E:\XFEL\sample_data
+  analysis_dir: E:\XFEL\sample_data
 
   # load_dir: F:\XFEL\raw_data
   # analysis_dir: F:\XFEL\analysis_data
@@ -15,7 +15,7 @@ path:
   processed_dir: ${path.analysis_dir}\processed_data
 
 param:
-  pump_setting: 30HZ
+  pump_setting: 15HZ
   hutch: eh1
   detector: jungfrau2
   xray: HX
