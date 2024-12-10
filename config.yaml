@@ -1,11 +1,11 @@
 runs:
-  [1]
+  [144]
 
 path:
   log_dir: ./logs
 
-  load_dir: E:\XFEL\sample_data
-  analysis_dir: E:\XFEL\sample_data
+  load_dir: Z:\230518_FXS\raw_data\h5\type=raw
+  analysis_dir: Z:\230518_FXS\analysis_data
 
   # load_dir: F:\XFEL\raw_data
   # analysis_dir: F:\XFEL\analysis_data
