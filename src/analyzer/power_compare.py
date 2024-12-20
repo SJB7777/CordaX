@@ -49,7 +49,7 @@ def plot_power_compare(power_df: pd.DataFrame):
         axs[1].text(group["delay"].iloc[-1] + 1, group["com_x"].iloc[-1], f'{power}%', va='center', ha='left')
         axs[2].text(group["delay"].iloc[-1] + 1, group["intensity"].iloc[-1], f'{power}%', va='center', ha='left')
 
-    fig.suptitle(f"Different Powers", fontsize=14)
+    fig.suptitle("Different Powers", fontsize=14)
 
     axs[0].set_title('COM x over Delays for Different Powers', fontsize=12)
     axs[1].set_title('COM y over Delays for Different Powers', fontsize=12)
@@ -68,6 +68,7 @@ def plot_power_compare(power_df: pd.DataFrame):
 
     plt.tight_layout()
     return fig
+
 
 def save_power_df(power_df: pd.DataFrame, root: str):
     for power, group in power_df.groupby("power"):

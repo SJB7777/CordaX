@@ -10,6 +10,7 @@ from src.config.config import load_config
 FWHM_COEFFICIENT: Final[float] = 2.35482  # FWHM_COEFFICIENT = 2 * np.sqrt(2 * np.log(2))
 WAVELENGTH_COEFFICIENT: Final[float] = 12.398419843320025
 
+
 def reverse_axis(array: npt.NDArray):
     return np.transpose(array, axes=range(array.ndim)[::-1])
 

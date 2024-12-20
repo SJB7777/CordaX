@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     config = load_config()
     load_dir: str = config.path.load_dir
-    print(f"{load_dir = }")
+    print(f"{load_dir=}")
     storage = StorageHandler(load_dir)
     print((144, 1, 3) in storage)
     print((145, 2, 3) in storage)

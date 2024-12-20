@@ -154,7 +154,7 @@ class PalXFELLoader(RawDataLoader):
         return np.asarray(
             merged_df[f'timestamp_info.RATE_{self.config.param.xray.value}_{self.config.param.pump_setting.value}'],
             dtype=np.bool_
-            )
+        )
 
     def get_data(self) -> dict[str, npt.NDArray]:
         """
@@ -188,7 +188,9 @@ def get_hdf5_images(file: str, config: ExpConfig) -> npt.NDArray:
         if "detector" not in hf:
             raise KeyError(f"Key 'detector' not found in {file}")
 
-        images = np.asarray(hf[f'detector/{config.param.hutch.value}/{config.param.detector.value}/image/block0_values'])
+        images = np.asarray(
+            hf[f'detector/{config.param.hutch.value}/{config.param.detector.value}/image/block0_values']
+        )
 
         return np.maximum(images, 0)
 
@@ -200,7 +202,6 @@ if __name__ == "__main__":
     config: ExpConfig = load_config()
     load_dir: str = config.path.load_dir
     file: str = get_run_scan_directory(load_dir, 141, 1, 77)
-
 
     start = time.time()
     loader = PalXFELLoader(file)

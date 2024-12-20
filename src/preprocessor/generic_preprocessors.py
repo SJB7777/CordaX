@@ -9,7 +9,9 @@ from sklearn.linear_model import RANSACRegressor
 from src.config.config import load_config
 
 
-def ransac_regression(y: np.ndarray, x: np.ndarray, min_samples: Optional[int] = None) -> tuple[npt.NDArray[np.bool_], npt.NDArray, npt.NDArray]:
+def ransac_regression(
+    y: np.ndarray, x: np.ndarray, min_samples: Optional[int] = None
+) -> tuple[npt.NDArray[np.bool_], npt.NDArray, npt.NDArray]:
     """
     Perform RANSAC (Random Sample Consensus) regression to identify inliers and estimate the regression model.
 
@@ -19,7 +21,8 @@ def ransac_regression(y: np.ndarray, x: np.ndarray, min_samples: Optional[int] =
     - min_samples (int, optional): The minimum number of samples to fit the model. Default is 3.
 
     Returns:
-    - tuple[npt.NDArray[np.bool_], npt.NDArray, npt.NDArray]: A tuple containing the inlier mask, coefficient, and intercept of the linear model.
+    - tuple[npt.NDArray[np.bool_], npt.NDArray, npt.NDArray]:
+        A tuple containing the inlier mask, coefficient, and intercept of the linear model.
     """
     X = x[:, np.newaxis]
     ransac = RANSACRegressor(min_samples=min_samples).fit(X, y)
@@ -75,23 +78,29 @@ def get_linear_regression_confidence_bounds(
     return lower_bound, upper_bound, y_fit
 
 
-def filter_images_qbpm_by_linear_model(images: npt.NDArray, qbpm: npt.NDArray, sigma: float) -> tuple[npt.NDArray, npt.NDArray]:
+def filter_images_qbpm_by_linear_model(
+    images: npt.NDArray, qbpm: npt.NDArray, sigma: float
+) -> tuple[npt.NDArray, npt.NDArray]:
     """
-    Filter images based on the confidence interval of their intensities using a linear regression model with QBPM values.
+    Filter images based on the confidence interval of their intensities
+    using a linear regression model with QBPM values.
 
     This function computes the total intensity of each image, applies a linear regression model
     to the intensity and QBPM values, and generates a mask to filter out images whose intensities
     fall outside the specified confidence interval.
 
     Parameters:
-    images (NDArray): Array of images. Shape: (N, H, W), where N is the number of images, and H and W are the height and width of each image.
+    images (NDArray): Array of images. Shape: (N, H, W), where N is the number of images,
+        and H and W are the height and width of each image.
     qbpm (NDArray): Array of QBPM (Quadrature Balanced Photodetector Measurements) values. Shape: (N,)
     sigma (float): Number of standard deviations for the confidence interval.
 
     Returns:
     tuple[NDArray, NDArray]: Tuple of filtered intensities and QBPM values.
-        - Filtered intensities (NDArray): Array of intensities within the confidence interval. Shape: (M,), where M <= N.
-        - Filtered qbpm (NDArray): Array of QBPM values corresponding to the filtered intensities. Shape: (M,), where M <= N.
+        - Filtered intensities (NDArray):
+            Array of intensities within the confidence interval. Shape: (M,), where M <= N.
+        - Filtered qbpm (NDArray):
+            Array of QBPM values corresponding to the filtered intensities. Shape: (M,), where M <= N.
 
     Note:
     This method uses the `get_linear_regression_confidence_lower_upper_bound` function to generate the mask based
@@ -109,7 +118,7 @@ def div_images_by_qbpm(images: npt.NDArray, qbpm: npt.NDArray) -> npt.NDArray:
     Divide images by qbpm.
 
     Parameters:
-    images (NDArray): Array of images. 
+    images (NDArray): Array of images.
         shape=(N, H, W), where N is the number of images,
         and H and W are the height and width of each image.
     qbpm (NDArray): Array of QBPM (Quadrature Balanced Photodetector Measurements) values. Shape: (N,)
@@ -132,6 +141,7 @@ def subtract_dark(images: npt.NDArray) -> npt.NDArray:
     none_zero_dark = np.maximum(dark, 0)
     return np.maximum(0, images - none_zero_dark[np.newaxis, :, :])
     # return np.maximum(images - dark[np.newaxis, :, :], 0)
+
 
 def add_bias(images: npt.NDArray):
     bias = np.min(images)

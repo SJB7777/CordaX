@@ -86,7 +86,7 @@ class DataAnalyzer:
         com_ys = []
 
         for image in roi_images:
-            max_y, max_x = np.unravel_index(np.argmax(image), image.shape) # pylint: disable=unbalanced-tuple-unpacking
+            max_y, max_x = np.unravel_index(np.argmax(image), image.shape)  # pylint: disable=unbalanced-tuple-unpacking
 
             x: npt.NDArray = np.arange(0, width)
             y: npt.NDArray = np.arange(0, height)
@@ -130,8 +130,12 @@ class DataAnalyzer:
         pon_com_x, pon_com_y = self._roi_center_of_masses(roi_rect, self.pon_images)
         pon_intensity = self._roi_intensities(roi_rect, self.pon_images)
 
-        # poff_guassain_intensity, poff_gussian_com_x, poff_gussian_com_y = self._roi_gaussian(roi_rect, self.poff_images)
-        # pon_guassain_intensity, pon_gussian_com_x, pon_gussian_com_y = self._roi_gaussian(roi_rect, self.pon_images)
+        # poff_guassain_intensity, poff_gussian_com_x, poff_gussian_com_y = self._roi_gaussian(
+        #     roi_rect, self.poff_images
+        # )
+        # pon_guassain_intensity, pon_gussian_com_x, pon_gussian_com_y = self._roi_gaussian(
+        #     roi_rect, self.pon_images
+        # )
 
         roi_df = pd.DataFrame(data={
             "poff_com_x": mul_delta_q(poff_com_x - poff_com_x[0]),

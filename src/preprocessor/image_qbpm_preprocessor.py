@@ -28,14 +28,14 @@ def create_pohang(roi_rect: RoiRectangle) -> ImagesQbpmProcessor:
         roi_intensities = roi_images.sum((1, 2))
 
         qbpm_mask = np.logical_and(
-            qbpm > qbpm.mean() - qbpm.std()*2,
-            qbpm < qbpm.mean() + qbpm.std()*2,
+            qbpm > qbpm.mean() - qbpm.std() * 2,
+            qbpm < qbpm.mean() + qbpm.std() * 2,
         )
 
         signal_ratio = roi_intensities[qbpm_mask] / qbpm[qbpm_mask]
 
         valid = np.logical_and(
-            signal_ratio < np.median(signal_ratio) + np.std(signal_ratio) * .3, 
+            signal_ratio < np.median(signal_ratio) + np.std(signal_ratio) * .3,
             signal_ratio > np.median(signal_ratio) - np.std(signal_ratio) * .3
         )
 

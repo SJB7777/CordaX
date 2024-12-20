@@ -1,5 +1,5 @@
 """
-This module provides functionality to load and save configuration files, 
+This module provides functionality to load and save configuration files,
 with support for placeholder substitution in the configuration values.
 """
 import re

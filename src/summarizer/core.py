@@ -25,7 +25,7 @@ class CoreSummarizer:
         logger: Optional[Logger] = None
     ) -> None:
         self.LoaderStrategy: type[RawDataLoader] = LoaderStrategy
-        self.preprocessor: dict[str, ImagesQbpmProcessor] = preprocessor if preprocessor is not None else {"no_processing": lambda x: x}
+        self.preprocessor: dict[str, ImagesQbpmProcessor] = preprocessor or {"no_processing": lambda x: x}
 
         self.logger: Logger = logger if logger is not None else setup_logger()
         self.result: dict[str, defaultdict[str, npt.NDArray]] = self.scan(scan_dir)

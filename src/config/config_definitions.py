@@ -55,7 +55,7 @@ class ExpPaths(BaseModel):
         anaylsis_dir (str): The save directory path.
     """
     log_dir: str = ""
-    
+
     load_dir: str = ""
     analysis_dir: str = ""
 

@@ -1,6 +1,7 @@
 import json
 from json import JSONDecodeError
 
+
 def clear_outputs(notebook_file: str, output_file: str):
     with open(notebook_file, 'r', encoding='utf-8') as f:
         notebook = json.load(f)
@@ -26,4 +27,3 @@ if __name__ == '__main__':
                     print(f"Failed to fix {file}")
                     continue
                 print(notebook, "cleared outputs")
-

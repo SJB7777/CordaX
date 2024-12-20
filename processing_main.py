@@ -23,6 +23,7 @@ from src.functional import compose
 logger: Logger = setup_logger()
 config: ExpConfig = load_config()
 
+
 def get_scan_nums(run_num: int) -> list[int]:
     """Get Scan numbers from real directory"""
     run_dir: str = get_run_scan_directory(config.path.load_dir, run_num)
@@ -97,7 +98,7 @@ def setup_preprocessors(scan_dir: str) -> dict[str, ImagesQbpmProcessor]:
     standard = compose(
         pohang,
         subtract_dark_background
-        )
+    )
 
     return {
         "standard": standard,
@@ -132,7 +133,7 @@ def main() -> None:
     run_nums: list[int] = config.runs
     logger.info(f"Runs to process: {run_nums}")
 
-    for run_num in run_nums: # pylint: disable=not-an-iterable
+    for run_num in run_nums:  # pylint: disable=not-an-iterable
         logger.info(f"Run: {run_num}")
         scan_nums: list[int] = get_scan_nums(run_num)
         for scan_num in scan_nums:

@@ -8,6 +8,7 @@ from src.config.config import load_config
 from src.analyzer.converter import load_npz
 from src.filesystem import get_run_scan_directory
 
+
 def load_image(run_n: int) -> np.ndarray:
     """Load image data from npz file."""
     config = load_config()
