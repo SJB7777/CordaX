@@ -12,13 +12,72 @@
     cd STO-XFEL
     ```
 
-## Updating the Environment
+2. **Updating the Environment:**
+    If you need to update the environment with new packages, you can do so by modifying the `environment.yaml` file and then running:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-If you need to update the environment with new packages, you can do so by modifying the `environment.yaml` file and then running:
+## Configuration Setup
+
+1. Create a `config.yaml` file in your project root directory with the following content:
+
+```yaml
+runs:
+  [136, 137, 143]
+
+path:
+  log_dir: ./logs
+
+  load_dir: path\of\raw\data
+  analysis_dir: path\of\analysis\result
+
+  output_dir: ${path.analysis_dir}\output_data
+  mat_dir: ${path.analysis_dir}\mat_files
+  processed_dir: ${path.analysis_dir}\processed_data
+
+param:
+  pump_setting: 15HZ
+  hutch: eh1
+  detector: jungfrau2
+  xray: HX
+  y1: 0
+  y2: 1
+  x1: 2
+  x2: 3
+  sdd: 1.3
+  dps: 7.5e-05
+  beam_energy: 9.7
+```
+
+2. Modify the following paths according to your system setup:
+   - `load_dir`: Path to raw HDF5 data files
+   - `analysis_dir`: Root directory for analysis outputs
+   - Adjust other paths as needed while maintaining the directory structure
+
+## Usage
+
+Run the processing script with:
 
 ```bash
-pip install -r requirements.txt
+python processing_main.py
 ```
+
+The script will:
+1. Read configuration from `config.yaml`
+2. Process specified runs (136, 137, 143)
+3. Use detector parameters from the configuration
+4. Save outputs in the specified directory structure
+5. Store logs in `./logs`
+
+## Important Parameters
+- `runs`: List of run numbers to process
+- `detector`: Detector configuration (jungfrau2)
+- `beam_energy`: X-ray beam energy in keV
+- `sdd`: Sample-to-detector distance in meters
+- Path configurations for input/output directories
+
+Note: Ensure all path locations are accessible and have proper read/write permissions before running the script.
 
 ## Project Overview
 The **PAL-XFEL Data Handling Toolkit** is a specialized suite of tools developed for the efficient processing and analysis of PAL-XFEL data, with a focus on time-resolved ultrafast experiments studying polaronic lattice distortions in Strontium Titanate (STO) nanocrystals. This toolkit is designed to enhance data handling, reduce processing times, and ensure the integrity of analytical results, making it an essential asset for our research on perovskite-oxide materials.
