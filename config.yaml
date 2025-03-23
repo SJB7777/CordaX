@@ -1,14 +1,11 @@
 runs:
-  [144, 145, 146, 147, 148, 149, 150]
+  [136, 137, 143]
 
 path:
   log_dir: ./logs
 
-  load_dir: E:\XFEL\sample_data
-  analysis_dir: E:\XFEL\sample_data
-
-  # load_dir: F:\XFEL\raw_data
-  # analysis_dir: F:\XFEL\analysis_data
+  load_dir: Y:\240608_FXS\raw_data\h5\type=raw
+  analysis_dir: Y:\240608_FXS\analysis_data
 
   output_dir: ${path.analysis_dir}\output_data
   mat_dir: ${path.analysis_dir}\mat_files

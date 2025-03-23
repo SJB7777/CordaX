@@ -6,9 +6,9 @@ import numpy as np
 from roi_rectangle import RoiRectangle
 
 from src.logger import setup_logger, Logger
-from src.summarizer.core import CoreSummarizer
-from src.summarizer.loader import PalXFELLoader
-from src.summarizer.saver import SaverStrategy, get_saver_strategy
+from src.integrater.core import CoreSummarizer
+from src.integrater.loader import PalXFELLoader
+from src.integrater.saver import SaverStrategy, get_saver_strategy
 from src.preprocessor.image_qbpm_preprocessor import (
     subtract_dark_background,
     create_pohang,

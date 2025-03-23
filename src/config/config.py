@@ -29,7 +29,7 @@ def replace_placeholders(data, context):
     elif isinstance(data, list):
         return [replace_placeholders(item, context) for item in data]
     elif isinstance(data, str):
-        return re.sub(r'\$\{([^}]+)\}', lambda match: resolve_placeholder(match.group(1), context), data)
+        return re.sub(r'\$\{([^}]+)\}', lambda match_: resolve_placeholder(match_.group(1), context), data)
     else:
         return data
 

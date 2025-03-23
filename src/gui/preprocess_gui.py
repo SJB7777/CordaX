@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
 
 from src.preprocessor.generic_preprocessors import get_linear_regression_confidence_bounds, ransac_regression
-from src.summarizer.loader import PalXFELLoader
+from src.integrater.loader import PalXFELLoader
 from src.filesystem import get_run_scan_directory
 
 from src.config.config import load_config

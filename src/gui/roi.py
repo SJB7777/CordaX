@@ -8,7 +8,7 @@ import numpy as np
 import numpy.typing as npt
 from roi_rectangle import RoiRectangle
 
-from src.summarizer.loader import get_hdf5_images
+from src.integrater.loader import get_hdf5_images
 from src.filesystem import get_run_scan_directory
 from src.config.config import load_config, ExpConfig
 

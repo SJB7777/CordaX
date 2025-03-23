@@ -3,7 +3,7 @@ import pstats
 import io
 import logging
 
-from src.summarizer.loader import PalXFELLoader
+from src.integrater.loader import PalXFELLoader
 from src.config.config import load_config, ExpConfig
 from src.filesystem import get_run_scan_directory
 

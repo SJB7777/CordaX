@@ -2,7 +2,7 @@ h5py
 hdf5plugin
 tables
 loguru
-numpy<2.0
+numpy
 matplotlib
 pandas
 pydantic

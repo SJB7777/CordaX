@@ -2,9 +2,9 @@ import os
 from abc import ABC, abstractmethod
 from typing import Union
 
+import pandas as pd
 import numpy as np
 import numpy.typing as npt
-import pandas as pd
 import h5py
 import hdf5plugin  # pylint: disable=unused-import
 

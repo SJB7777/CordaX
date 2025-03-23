@@ -6,8 +6,8 @@ import numpy as np
 import numpy.typing as npt
 from tqdm import tqdm
 
-from src.summarizer.saver import SaverStrategy
-from src.summarizer.loader import RawDataLoader
+from src.integrater.saver import SaverStrategy
+from src.integrater.loader import RawDataLoader
 from src.preprocessor.image_qbpm_preprocessor import ImagesQbpmProcessor
 from src.logger import setup_logger, Logger
 from src.config.config import load_config, ExpConfig
