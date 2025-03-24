@@ -23,14 +23,14 @@ from src.functional import compose
 logger: Logger = setup_logger()
 config: ExpConfig = load_config()
 
-
+# TODO: Move to other directory
 def get_scan_nums(run_num: int) -> list[int]:
     """Get Scan numbers from real directory"""
     run_dir: str = get_run_scan_directory(config.path.load_dir, run_num)
     scan_folders: list[str] = os.listdir(run_dir)
     return [int(scan_dir.split("=")[1]) for scan_dir in scan_folders]
 
-
+# TODO: Move to other directory
 def get_roi(scan_dir: str) -> RoiRectangle:
     """Get Roi for QBPM Normalization"""
     files = os.listdir(scan_dir)
@@ -51,7 +51,7 @@ def get_roi(scan_dir: str) -> RoiRectangle:
 
     return RoiRectangle.from_tuple(roi)
 
-
+# TODO: Move to other directory
 def select_roi(scan_dir: str, index_mode: Optional[int] = None) -> RoiRectangle:
     """Get Roi for QBPM Normalization"""
     files = os.listdir(scan_dir)
@@ -66,6 +66,7 @@ def select_roi(scan_dir: str, index_mode: Optional[int] = None) -> RoiRectangle:
     return RoiRectangle.from_tuple(RoiSelector().select_roi(np.log1p(image)))
 
 
+# TODO: Move to other directory
 def auto_roi(scan_dir: str, index_mode: Optional[int] = None):
     files = os.listdir(scan_dir)
     files.sort(key=lambda name: int(name[1:-3]))
@@ -105,8 +106,8 @@ def setup_preprocessors(scan_dir: str) -> dict[str, ImagesQbpmProcessor]:
     }
 
 
-def process_scan(run_n: int, scan_n: int) -> None:
-    """Process Single Scan"""
+def integrate_scan(run_n: int, scan_n: int) -> None:
+    """Integrate Single Scan"""
 
     load_dir = config.path.load_dir
     scan_dir = get_run_scan_directory(load_dir, run_n, scan_n)
@@ -138,7 +139,7 @@ def main() -> None:
         scan_nums: list[int] = get_scan_nums(run_num)
         for scan_num in scan_nums:
             try:
-                process_scan(run_num, scan_num)
+                integrate_scan(run_num, scan_num)
             except Exception:
                 logger.exception(f"Failed to process run={run_num}, scan={scan_num}")
                 raise
